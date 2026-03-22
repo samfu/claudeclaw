@@ -393,6 +393,7 @@ Replace grep-based `memory_search` with [QMD](https://github.com/tobi/qmd) for h
 | `claudeclaw-discord` | Discord channel integration |
 | `claudeclaw-gmail` | Gmail as a full channel (not just a tool) |
 | `claudeclaw-memory` | QMD-powered semantic memory (replaces grep search) |
+| `claudeclaw-obsidian` | Obsidian vault integration — sync memory, articles, notes between ClaudeClaw and Obsidian |
 | `claudeclaw-tui` | Terminal UI for managing instances, groups, tasks |
 
 ## Development

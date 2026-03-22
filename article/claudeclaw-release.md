@@ -237,6 +237,7 @@ Replace grep-based `memory_search` with [QMD](https://github.com/tobi/qmd)'s hyb
 | `claudeclaw-discord` | Discord channel integration |
 | `claudeclaw-gmail` | Gmail as a full channel |
 | `claudeclaw-memory` | QMD-powered semantic memory |
+| `claudeclaw-obsidian` | Obsidian vault sync (memory, articles, notes) |
 | `claudeclaw-tui` | Terminal UI for instance management |
 
 ## Numbers

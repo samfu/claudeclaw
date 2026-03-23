@@ -8,6 +8,20 @@
 
 Built on [NanoClaw](https://github.com/qwibitai/nanoclaw) — ported to a Claude Code plugin architecture with a pluggable extension system and Anthropic's sandbox runtime.
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![GitHub Stars](https://img.shields.io/github/stars/sbusso/claudeclaw)](https://github.com/sbusso/claudeclaw)
+
+## Extensions
+
+Channels and agents are installable extensions — install only what you need:
+
+| Extension | Type | Install |
+|-----------|------|---------|
+| [claudeclaw-slack](https://github.com/sbusso/claudeclaw-slack) | Channel | `/install-extension slack` |
+| [claudeclaw-triage](https://github.com/sbusso/claudeclaw-triage) | Agent | `/install-extension triage` |
+
+More planned: [Discord](https://github.com/sbusso/claudeclaw#future-extensions), [Gmail](https://github.com/sbusso/claudeclaw#future-extensions), [QMD Memory](https://github.com/sbusso/claudeclaw#qmd-semantic-memory), [Obsidian](https://github.com/sbusso/claudeclaw#future-extensions), [TUI](https://github.com/sbusso/claudeclaw#future-extensions).
+
 ## What It Does
 
 ClaudeClaw is a Claude Code plugin that provides an always-on message loop. It listens to channels (Slack, WhatsApp, Telegram), routes messages to Claude agents running in isolated sandboxes, and manages ongoing conversations with structured memory.
@@ -317,7 +331,7 @@ registerExtension({
 });
 ```
 
-Built-in extensions: **webhook triggers**, **cost tracking**. Installable: **claudeclaw-slack**, **claudeclaw-triage**.
+Built-in extensions: **webhook triggers**, **cost tracking**. Installable: [**claudeclaw-slack**](https://github.com/sbusso/claudeclaw-slack), [**claudeclaw-triage**](https://github.com/sbusso/claudeclaw-triage).
 
 ## Customizing
 
@@ -393,13 +407,15 @@ Replace grep-based `memory_search` with [QMD](https://github.com/tobi/qmd) for h
 
 ### Future Extensions
 
-| Extension | Purpose |
-|-----------|---------|
-| `claudeclaw-discord` | Discord channel integration |
-| `claudeclaw-gmail` | Gmail as a full channel (not just a tool) |
-| `claudeclaw-memory` | QMD-powered semantic memory (replaces grep search) |
-| `claudeclaw-obsidian` | Obsidian vault integration — sync memory, articles, notes between ClaudeClaw and Obsidian |
-| `claudeclaw-tui` | Terminal UI for managing instances, groups, tasks |
+| Extension | Purpose | Status |
+|-----------|---------|--------|
+| `claudeclaw-discord` | Discord channel integration | Planned |
+| `claudeclaw-gmail` | Gmail as a full channel (not just a tool) | Planned |
+| `claudeclaw-memory` | [QMD](https://github.com/tobi/qmd)-powered semantic memory (replaces grep search) | Planned |
+| `claudeclaw-obsidian` | Obsidian vault integration — sync memory, articles, notes | Planned |
+| `claudeclaw-tui` | Terminal UI for managing instances, groups, tasks | Planned |
+
+See the [discussions](https://github.com/sbusso/claudeclaw/discussions) for feature requests and ideas.
 
 ## Development
 
@@ -409,6 +425,14 @@ npm run dev      # Run with tsx
 npm test         # Run tests (355 core tests)
 ```
 
+## Related Projects
+
+- [NanoClaw](https://github.com/qwibitai/nanoclaw) — upstream project, minimal agent orchestrator
+- [dotclaude.com](https://dotclaude.com) — Claude Code reference site (skills, hooks, plugins, MCP)
+- [Anthropic sandbox-runtime](https://www.npmjs.com/package/@anthropic-ai/sandbox-runtime) — OS-level sandboxing used by ClaudeClaw
+- [QMD](https://github.com/tobi/qmd) — hybrid semantic search engine (planned memory upgrade)
+- [Claude Agent SDK](https://docs.anthropic.com/en/docs/agents) — the SDK powering ClaudeClaw's agents
+
 ## License
 
-MIT
+[MIT](LICENSE)

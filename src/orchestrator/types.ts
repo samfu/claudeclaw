@@ -103,6 +103,8 @@ export interface Channel {
   setTyping?(jid: string, isTyping: boolean): Promise<void>;
   // Optional: sync group/chat names from the platform.
   syncGroups?(force: boolean): Promise<void>;
+  // Optional: upload a file to the channel.
+  sendFile?(jid: string, filePath: string, filename: string, comment?: string): Promise<void>;
 }
 
 // --- Message routing ---

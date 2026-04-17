@@ -292,6 +292,10 @@ async function processGroupMessages(chatJid: string, router: MessageRouter): Pro
             groupFolder: group.folder,
           });
           outputSentToUser = true;
+          // Clear typing indicators (eyes reactions) after sending response.
+          // This handles both the initial setTyping(true) from processGroupMessages
+          // and any accumulated reactions from the piping path in startMessageLoop.
+          await channel.setTyping?.(replyJid, false);
         }
         // Only reset idle timer on actual results, not session-update markers (result: null)
         resetIdleTimer();
@@ -814,4 +818,3 @@ export async function main(): Promise<void> {
     process.exit(1);
   });
 }
-

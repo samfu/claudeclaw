@@ -64,6 +64,48 @@ server.tool(
 );
 
 server.tool(
+  'send_file',
+  'Upload a file to the current chat/channel. The file must exist in /workspace/group/. The host downloads and uploads it — no tokens cross the IPC boundary.',
+  {
+    path: z.string().describe('File path relative to /workspace/group/ (e.g., "files/plan.md")'),
+    filename: z.string().describe('Display filename in the channel (e.g., "deployment-plan.md")'),
+    comment: z.string().optional().describe('Optional message posted alongside the file (use channel-native formatting)'),
+  },
+  async (args) => {
+    // Prevent directory traversal
+    const normalized = path.normalize(args.path);
+    if (normalized.startsWith('..') || path.isAbsolute(normalized)) {
+      return {
+        content: [{ type: 'text' as const, text: 'Invalid path: must be relative and within /workspace/group/.' }],
+        isError: true,
+      };
+    }
+
+    const fullPath = path.join(WORKSPACE_GROUP, normalized);
+    if (!fs.existsSync(fullPath)) {
+      return {
+        content: [{ type: 'text' as const, text: `File not found: ${args.path}` }],
+        isError: true,
+      };
+    }
+
+    const data: Record<string, string | undefined> = {
+      type: 'send_file',
+      chatJid,
+      groupFolder,
+      filePath: normalized,
+      filename: args.filename,
+      comment: args.comment || undefined,
+      timestamp: new Date().toISOString(),
+    };
+
+    writeIpcFile(MESSAGES_DIR, data);
+
+    return { content: [{ type: 'text' as const, text: `File upload requested: ${args.filename}` }] };
+  },
+);
+
+server.tool(
   'schedule_task',
   `Schedule a recurring or one-time task. The task will run as a full agent with access to all tools. Returns the task ID for future reference. To modify an existing task, use update_task instead.
 

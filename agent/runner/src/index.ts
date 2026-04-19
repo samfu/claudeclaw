@@ -548,6 +548,17 @@ async function runQuery(
           CLAUDECLAW_IS_MAIN: containerInput.isMain ? '1' : '0',
         },
       },
+      ...(process.env.GITHUB_TOKEN
+        ? {
+            github: {
+              command: 'node',
+              args: ['/usr/local/lib/node_modules/@modelcontextprotocol/server-github/dist/index.js'],
+              env: {
+                GITHUB_PERSONAL_ACCESS_TOKEN: process.env.GITHUB_TOKEN,
+              },
+            },
+          }
+        : {}),
     },
     hooks: {
       PreCompact: [{ hooks: [createPreCompactHook(containerInput.assistantName)] }],

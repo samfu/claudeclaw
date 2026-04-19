@@ -254,6 +254,14 @@ function buildContainerArgs(
     args.push('-e', 'CLAUDE_CODE_OAUTH_TOKEN=placeholder');
   }
 
+  // Pass GitHub token to container (for GitHub MCP server and gh CLI)
+  const ghToken = readEnvFile(['GITHUB_TOKEN'])['GITHUB_TOKEN']
+    || readEnvFile(['GH_TOKEN'])['GH_TOKEN'];
+  if (ghToken) {
+    args.push('-e', `GITHUB_TOKEN=${ghToken}`);
+    args.push('-e', `GH_TOKEN=${ghToken}`);
+  }
+
   // Pass plugin-registered env vars to container
   const pluginEnvKeys = getExtensionContainerEnvKeys();
   if (pluginEnvKeys.length > 0) {
